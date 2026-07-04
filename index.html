@@ -80,6 +80,7 @@ body { font-family:var(--font); background:var(--bg-deep); color:var(--text); li
 
 /* Hero */
 .hero { min-height:100vh; display:flex; align-items:center; position:relative; padding:120px 24px 60px; }
+.hero:not(.active) { display:none; }
 .hero-bg { position:absolute; inset:0; overflow:hidden; pointer-events:none; }
 .hero-gradient { position:absolute; top:-50%; right:-20%; width:600px; height:600px; border-radius:50%; background:radial-gradient(circle,rgba(0,116,255,.08),transparent 70%); }
 .hero-content { max-width:1200px; margin:0 auto; position:relative; z-index:1; }
@@ -184,7 +185,7 @@ body { font-family:var(--font); background:var(--bg-deep); color:var(--text); li
 <!-- Navbar -->
 <nav class="navbar" id="navbar">
   <div class="navbar-inner">
-    <a href="#" class="navbar-brand" onclick="navigate('overview')">
+    <a href="#" class="navbar-brand" onclick="navigate('overview',event)">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 226.77 226.77" aria-label="AEL Logo">
         <path d="m97.19,48.59v16.2h-32.4v-16.2c0-8.94-7.25-16.2-16.2-16.2s-16.2,7.25-16.2,16.2v16.2H0v-16.2c0-5.68.98-11.13,2.76-16.2C9.44,13.52,27.44,0,48.59,0s39.16,13.52,45.83,32.4c1.79,5.07,2.76,10.52,2.76,16.2Z" fill="#ffffff"/>
         <rect y="97.19" width="32.4" height="32.4" fill="#0074FF"/>
@@ -211,11 +212,11 @@ body { font-family:var(--font); background:var(--bg-deep); color:var(--text); li
     </a>
     <button class="nav-toggle" onclick="document.getElementById('navLinks').classList.toggle('open')" aria-label="Toggle menu"><i class="fas fa-bars"></i></button>
     <div class="navbar-links" id="navLinks">
-      <a class="nav-link active" href="#overview" onclick="navigate('overview')">Overview</a>
-      <a class="nav-link" href="#projects" onclick="navigate('projects')">Projects</a>
-      <a class="nav-link" href="#about" onclick="navigate('about')">About</a>
-      <a class="nav-link" href="#credentials" onclick="navigate('credentials')">Credentials</a>
-      <a class="nav-link" href="#contact" onclick="navigate('contact')">Contact</a>
+      <a class="nav-link active" href="#overview" onclick="navigate('overview',event)">Overview</a>
+      <a class="nav-link" href="#projects" onclick="navigate('projects',event)">Projects</a>
+      <a class="nav-link" href="#about" onclick="navigate('about',event)">About</a>
+      <a class="nav-link" href="#credentials" onclick="navigate('credentials',event)">Credentials</a>
+      <a class="nav-link" href="#contact" onclick="navigate('contact',event)">Contact</a>
     </div>
   </div>
 </nav>
@@ -232,8 +233,8 @@ body { font-family:var(--font); background:var(--bg-deep); color:var(--text); li
       Entrepreneur, Web Developer, and AI Prompt Engineer. Founder of Ayman Elmasry LLC — precision-engineering digital solutions at the intersection of computational logic and creative strategy.
     </p>
     <div class="hero-actions">
-      <a href="#" class="btn btn-primary" onclick="navigate('projects')"><i class="fas fa-grid-2"></i> View Projects</a>
-      <a href="#" class="btn btn-ghost" onclick="navigate('contact')"><i class="fas fa-envelope"></i> Contact</a>
+      <a href="#" class="btn btn-primary" onclick="navigate('projects',event)"><i class="fas fa-grid-2"></i> View Projects</a>
+      <a href="#" class="btn btn-ghost" onclick="navigate('contact',event)"><i class="fas fa-envelope"></i> Contact</a>
     </div>
     <div class="hero-stats">
       <div><div class="hero-stat-value">11+</div><div class="hero-stat-label">Projects Delivered</div></div>
@@ -646,13 +647,11 @@ body { font-family:var(--font); background:var(--bg-deep); color:var(--text); li
 
 <!-- JavaScript -->
 <script>
-function navigate(id) {
+function navigate(id, e) {
+  if (e) e.preventDefault();
   document.querySelectorAll('.section, .hero').forEach(s => s.classList.remove('active'));
-  if (id === 'overview') {
-    document.getElementById('overview').classList.add('active');
-  } else {
-    document.getElementById(id).classList.add('active');
-  }
+  const el = id === 'overview' ? document.getElementById('overview') : document.getElementById(id);
+  if (el) el.classList.add('active');
   document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
   const link = document.querySelector(`.nav-link[href="${id === 'overview' ? '#overview' : '#'+id}"]`);
   if (link) link.classList.add('active');
