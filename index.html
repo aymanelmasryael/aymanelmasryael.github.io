@@ -165,6 +165,13 @@ body { font-family:var(--font); background:var(--bg-deep); color:var(--text); li
 .footer a { color:var(--text-muted); text-decoration:none; }
 .footer a:hover { color:var(--primary); }
 
+/* Credentials */
+.cred-header { display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+.cred-header span { font-size:13px; font-weight:600; }
+.cred-badge { font-size:10px; font-weight:600; text-transform:uppercase; letter-spacing:.5px; padding:3px 10px; border-radius:40px; background:rgba(0,116,255,.08); border:1px solid var(--border-light); color:var(--primary); }
+.cred-meta { display:flex; gap:16px; font-size:11px; color:var(--text-dim); margin-bottom:8px; }
+.cred-meta span::before { content:'\f017'; font-family:'Font Awesome 6 Free'; font-weight:400; margin-right:4px; color:var(--primary); }
+
 /* Responsive */
 @media (max-width:480px) {
   .project-grid { grid-template-columns:1fr; }
@@ -207,6 +214,7 @@ body { font-family:var(--font); background:var(--bg-deep); color:var(--text); li
       <a class="nav-link active" href="#overview" onclick="navigate('overview')">Overview</a>
       <a class="nav-link" href="#projects" onclick="navigate('projects')">Projects</a>
       <a class="nav-link" href="#about" onclick="navigate('about')">About</a>
+      <a class="nav-link" href="#credentials" onclick="navigate('credentials')">Credentials</a>
       <a class="nav-link" href="#contact" onclick="navigate('contact')">Contact</a>
     </div>
   </div>
@@ -262,7 +270,7 @@ body { font-family:var(--font); background:var(--bg-deep); color:var(--text); li
 <!-- Projects -->
 <section id="projects" class="section">
   <div class="section-header">
-    <div class="section-number">01 // PORTFOLIO</div>
+    <div class="section-number">01 // PROJECTS</div>
     <h2 class="section-title">Deployed Systems</h2>
     <p class="section-subtitle">Architectural showcases and production-ready digital environments</p>
   </div>
@@ -481,7 +489,7 @@ body { font-family:var(--font); background:var(--bg-deep); color:var(--text); li
 <!-- About -->
 <section id="about" class="section">
   <div class="section-header">
-    <div class="section-number">02 // ABOUT</div>
+    <div class="section-number">02 // PROFILE</div>
     <h2 class="section-title">The Architect</h2>
     <p class="section-subtitle">Precision-engineered digital solutions from concept to deployment</p>
   </div>
@@ -515,10 +523,61 @@ body { font-family:var(--font); background:var(--bg-deep); color:var(--text); li
   </div>
 </section>
 
+<!-- Credentials -->
+<section id="credentials" class="section">
+  <div class="section-header">
+    <div class="section-number">02 // CREDENTIALS</div>
+    <h2 class="section-title">Verified Credentials</h2>
+    <p class="section-subtitle">6+ International certifications from leading institutions</p>
+  </div>
+  <div class="about-grid">
+    <div class="about-card">
+      <div class="cred-header"><i class="fab fa-ibm" style="color:var(--primary)"></i><span>IBM SkillsBuild</span><span class="cred-badge">AI Certification</span></div>
+      <h3 style="font-size:15px;font-weight:700;margin:8px 0">Artificial Intelligence Fundamentals</h3>
+      <div class="cred-meta"><span>June 2025</span><span>ID: 987ce86b</span></div>
+      <p style="font-size:13px;color:var(--text-muted);line-height:1.6">Comprehensive training in neural networks, data systems, and applied AI logic fundamentals. Mastered cutting-edge AI technologies and implementation strategies.</p>
+      <a href="https://www.credly.com/badges/987ce86b-fae4-49ee-b9d8-726979b95ebe" target="_blank" rel="noopener" class="btn btn-ghost" style="margin-top:12px;padding:8px 16px;font-size:12px"><i class="fas fa-external-link-alt"></i> Verify Credential</a>
+    </div>
+    <div class="about-card">
+      <div class="cred-header"><i class="fas fa-university" style="color:var(--primary)"></i><span>AAST University</span><span class="cred-badge">Design Certification</span></div>
+      <h3 style="font-size:15px;font-weight:700;margin:8px 0">Digital Arts &amp; Web Design</h3>
+      <div class="cred-meta"><span>March 2024</span><span>ID: 1235013466</span></div>
+      <p style="font-size:13px;color:var(--text-muted);line-height:1.6">Full stack design mastery: Adobe Creative Suite, HTML/CSS, Flash Animation. Achieved perfect A+ grade across all design and development modules.</p>
+    </div>
+    <div class="about-card">
+      <div class="cred-header"><i class="fas fa-laptop-code" style="color:var(--primary)"></i><span>UPV - edX University</span><span class="cred-badge">Systems Certification</span></div>
+      <h3 style="font-size:15px;font-weight:700;margin:8px 0">Information Systems &amp; Computer Applications</h3>
+      <div class="cred-meta"><span>2017</span><span>Part 1 of 2</span></div>
+      <p style="font-size:13px;color:var(--text-muted);line-height:1.6">Advanced information systems, network architecture, and computational logic. Comprehensive IT certification covering infrastructure and applications.</p>
+    </div>
+    <div class="about-card">
+      <div class="cred-header"><i class="fab fa-google" style="color:var(--primary)"></i><span>Google Maharat</span><span class="cred-badge">Marketing Certification</span></div>
+      <h3 style="font-size:15px;font-weight:700;margin:8px 0">Digital Marketing Professional</h3>
+      <div class="cred-meta"><span>2019</span><span>Code: 6B2 9RH AKL</span></div>
+      <p style="font-size:13px;color:var(--text-muted);line-height:1.6">Expert-level SEO strategies, analytics implementation, online advertising campaigns, and social media marketing mastery across all digital platforms.</p>
+    </div>
+    <div class="about-card">
+      <div class="cred-header"><i class="fas fa-microchip" style="color:var(--primary)"></i><span>Smouha Academy</span><span class="cred-badge">Engineering Certification</span></div>
+      <h3 style="font-size:15px;font-weight:700;margin:8px 0">Computer Systems Engineering</h3>
+      <div class="cred-meta"><span>2016</span><span>Accredited by MFA Egypt</span></div>
+      <p style="font-size:13px;color:var(--text-muted);line-height:1.6">Comprehensive computer assembly, hardware diagnostics, OS troubleshooting. Accredited by Ministry of Foreign Affairs Egypt for international recognition.</p>
+    </div>
+    <div class="about-card">
+      <div class="cred-header"><i class="fas fa-paint-brush" style="color:var(--primary)"></i><span>Domestika Pro</span><span class="cred-badge">Creative Suite</span></div>
+      <h3 style="font-size:15px;font-weight:700;margin:8px 0">Creative Suite Mastery</h3>
+      <div class="cred-meta"><span>2020-2021</span><span>7+ Specialized Courses</span></div>
+      <p style="font-size:13px;color:var(--text-muted);line-height:1.6">Professional training in Adobe Photoshop, Illustrator, After Effects, Logo Design, and advanced motion graphics techniques for modern digital production.</p>
+    </div>
+  </div>
+  <div style="text-align:center;margin-top:24px;padding:16px;border-radius:12px;background:rgba(0,116,255,.04);border:1px solid var(--border);font-size:13px;color:var(--text-muted)">
+    <i class="fas fa-shield-alt" style="color:var(--primary);margin-right:8px"></i>All credentials are independently verifiable through their respective issuing institutions.
+  </div>
+</section>
+
 <!-- Contact -->
 <section id="contact" class="section">
   <div class="section-header">
-    <div class="section-number">03 // CONTACT</div>
+    <div class="section-number">04 // CONTACT</div>
     <h2 class="section-title">Strategic Contact</h2>
     <p class="section-subtitle">Initiate a strategic collaboration for your next digital innovation project</p>
   </div>
