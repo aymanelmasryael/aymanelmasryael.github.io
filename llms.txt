@@ -1,0 +1,27 @@
+# Ayman Elmasry — Visionary Architect · AI Orchestrator · Brand Designer
+
+> Founder of AEL Digital Studio. I define the vision and orchestrate AI to build it. Portfolio at ayman-elmasry.vercel.app. Based in UAE/Kuwait.
+
+Ayman Elmasry is a Visionary Architect, AI Orchestrator, and Brand Designer with expertise in Web Development (Full-Stack), Artificial Intelligence & Prompt Engineering, Brand Architecture & UI/UX Design, Digital Marketing & Strategy, and AI Orchestration & Automation. Phone: +971 50 603 9162 / +965 55 125 151. Email: ayman@aymanelmasry.com.
+
+Certifications: IBM SkillsBuild Artificial Intelligence Fundamentals (Jun 2025), AAST Mini Certificate in Digital Arts & Web Design (Mar 2024), Smouha Academy Computer Systems Engineering (2016).
+
+## Links
+- [LinkedIn](https://linkedin.com/in/aymanelmasrydesign): Professional network and experience
+- [GitHub](https://github.com/aymanelmasryael): Open source projects and code repositories
+- [X / Twitter](https://x.com/aymanelmasryai): Social media and updates
+- [Instagram](https://instagram.com/aymanelmasrydesign): Visual portfolio and design work
+- [Upwork](https://upwork.com/freelancers/~01040a6e65c4cbb6a2): Freelance profile and reviews
+
+## Projects
+- [MQ Group Platform](https://www.aymanelmasry.com): Corporate website with booking engine
+- [LIONS Tan Oil](https://www.aymanelmasry.com): Global brand platform
+- [AEL Color OS](https://www.aymanelmasry.com): Design system color generator
+- [1000+ AI Prompts Library](https://www.aymanelmasry.com): Curated prompt repository
+- [AEL Sovereign Master Citadel](https://www.aymanelmasry.com): AI architecture system
+- [AEL Prompt Framework](https://www.aymanelmasry.com): Structured prompt framework
+- [AEL AI Chat Interface](https://www.aymanelmasry.com): Chat UI component system
+- [AEL Design System](https://www.aymanelmasry.com): Component library
+- [AEL Image Color Extractor](https://www.aymanelmasry.com): Color palette extraction tool
+- [AEL Analytics Dashboard](https://www.aymanelmasry.com): Data visualization system
+- [AEL Markdown CMS](https://www.aymanelmasry.com): Lightweight content management
