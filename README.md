@@ -1,6 +1,6 @@
 # Ayman Elmasry — AEL Digital Studio | Portfolio & Certifications
 
-> **Personal portfolio and certifications website** showcasing 13 digital projects, CS50x academic work, and 15 verified professional certifications.  
+> **Personal portfolio and certifications website** showcasing 14 digital projects, CS50x academic work, and 15 verified professional certifications.  
 > Built with zero dependencies and deployed on GitHub Pages.  
 > by Ayman Elmasry — AEL Digital Studio.
 
@@ -40,9 +40,9 @@
 | **Image Color Extractor** | Canvas-based palette generator with median cut | [Launch](https://aymanelmasryael.github.io/ael-image-color-extractor/) |
 | **Analytics Dashboard** | Pure SVG charting engine, 5 chart types | [Launch](https://aymanelmasryael.github.io/ael-analytics-dashboard/) |
 | **Markdown CMS** | Lightweight editor with live preview and export | [Launch](https://aymanelmasryael.github.io/ael-markdown-cms/) |
-| **Ω-COLOR OMNI-OS V4** | Semantic color palette generator, 5 export formats | [Launch](https://aymanelmasryael.github.io/ael-color-os/) |
+| **AEL Color OS v3** | Sovereign color intelligence, 6 harmonic modes, WCAG analysis | [Launch](https://aymanelmasryael.github.io/ael-color-os/) |
 | **1,000+ AI Prompts Library** | 10 curated batches, generation engine, smart search | [Launch](https://aymanelmasryael.github.io/ael-1000-prompts-library/) |
-| **AEL Prompt Framework** | 50 professional AI prompts with generation engine | [Launch](https://aymanelmasryael.github.io/ael-prompt-framework/) |
+| **AEL Prompt Framework** | 52 UI prompts — merged as Batch 11 into 1000+ Prompts Library | [Launch](https://aymanelmasryael.github.io/ael-prompt-framework/) |
 | **3D Particle Backgrounds Library** | 1,000+ prompts with interactive 3D canvas | [Launch](https://aymanelmasryael.github.io/ael-3d-particle-backgrounds-library/) |
 | **AEL Particles Lab v3.2** | High-density particle engine with generative AI | [Launch](https://aymanelmasryael.github.io/ael-particles-lab/) |
 | **AI Alignment Quotes** | 10,000 unique quotes from combinatorial engine | [Launch](https://aymanelmasryael.github.io/ai-alignment-quotes/) |
