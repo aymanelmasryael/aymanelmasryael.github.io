@@ -1,0 +1,16 @@
+{
+  "name": "Ayman Elmasry — AEL Digital Studio",
+  "short_name": "AEL Digital",
+  "description": "Visionary Architect · AI Orchestrator · Brand Designer",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0B1220",
+  "theme_color": "#0074FF",
+  "icons": [
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ]
+}
