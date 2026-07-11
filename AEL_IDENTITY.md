@@ -1,5 +1,5 @@
 
-> **AEL Vision Framework v2.2** — © 2026 Ayman Elmasry — AEL Digital Studio
+> **AEL Digital Studio™** — © 2026 Ayman Elmasry — AEL Digital Studio
 > All rights reserved under AEL Prompt IP System v1.0
 
 ---
