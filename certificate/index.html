@@ -5,275 +5,467 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AEL Certificates — Ayman Elmasry</title>
   <style>
+    :root {
+      --bg: #0B1220; --surface: #111827; --surface2: #1E293B;
+      --surface3: #1A2332; --border: #1E3A5F; --border-hover: #0074FF;
+      --text: #E6EEF8; --text-dim: #7B8FA8; --text-muted: #4B5C73;
+      --blue: #0074FF; --gold: #FFD700; --teal: #00FFCC;
+      --purple: #6C47FF; --pink: #FF4D8D; --green: #00FF88; --red: #FF4444;
+    }
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
-      background: #0A0E1A;
-      color: #E8EDF5;
+      background: var(--bg); color: var(--text);
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      line-height: 1.6;
-      padding: 2rem 1rem;
+      line-height: 1.6; min-height: 100vh;
     }
-    .container { max-width: 800px; margin: 0 auto; }
-    h1 {
-      font-size: 1.8rem;
-      font-weight: 600;
-      margin-bottom: 0.5rem;
-      color: #FFFFFF;
+    header {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(11,18,32,0.85); backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 1.5rem;
     }
-    h1 span { color: #0074FF; }
-    .subtitle {
-      color: #8892A4;
-      margin-bottom: 2.5rem;
-      font-size: 0.95rem;
+    .header-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: flex; align-items: center; gap: 1rem;
     }
-    h2 {
-      font-size: 1.2rem;
-      font-weight: 600;
-      margin: 2rem 0 1rem;
-      padding-bottom: 0.5rem;
-      border-bottom: 1px solid #1E2538;
-      color: #0074FF;
+    .logo { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; }
+    .logo svg { width: 40px; height: 40px; flex-shrink: 0; }
+    .logo-text { display: flex; flex-direction: column; }
+    .logo-text .ael { font-size: 1.1rem; font-weight: 700; color: #fff; letter-spacing: 0.5px; }
+    .logo-text .title { font-size: 0.8rem; color: var(--green); font-weight: 500; }
+    .header-right { margin-left: auto; display: flex; align-items: center; gap: 1rem; }
+    .header-right span { font-size: 0.8rem; color: var(--text-dim); text-align: right; line-height: 1.3; }
+    .search-wrap { max-width: 1200px; margin: 1.5rem auto 0; padding: 0 1.5rem; }
+    .search-bar { position: relative; max-width: 480px; }
+    .search-bar input {
+      width: 100%; padding: 0.7rem 1rem 0.7rem 2.5rem;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 8px; color: var(--text); font-size: 0.9rem;
+      outline: none; transition: border 0.2s;
     }
-    .cert {
-      background: #111827;
-      border: 1px solid #1E2538;
-      border-radius: 8px;
-      padding: 1rem 1.2rem;
-      margin-bottom: 0.75rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 1rem;
+    .search-bar input:focus { border-color: var(--blue); }
+    .search-bar input::placeholder { color: var(--text-muted); }
+    .search-icon {
+      position: absolute; left: 0.8rem; top: 50%;
+      transform: translateY(-50%); font-size: 0.9rem; opacity: 0.5;
     }
-    .cert-info h3 { font-size: 1rem; font-weight: 500; margin-bottom: 0.2rem; }
-    .cert-info .meta { font-size: 0.85rem; color: #8892A4; }
-    .cert-links { display: flex; gap: 0.5rem; flex-shrink: 0; }
-    .cert-links a {
-      display: inline-block;
-      padding: 0.35rem 0.75rem;
-      border-radius: 6px;
-      font-size: 0.8rem;
-      text-decoration: none;
-      font-weight: 500;
+    .search-hint {
+      position: absolute; right: 0.8rem; top: 50%;
+      transform: translateY(-50%); font-size: 0.7rem;
+      color: var(--text-muted); background: var(--surface2);
+      padding: 0.15rem 0.5rem; border-radius: 4px; border: 1px solid var(--border);
     }
-    .btn-pdf { background: #0074FF; color: #fff; }
-    .btn-verify { background: #1E2538; color: #8892A4; border: 1px solid #2A334A; }
-    .btn-pdf:hover { background: #0058CC; }
-    .btn-verify:hover { background: #2A334A; color: #E8EDF5; }
-    footer {
-      margin-top: 3rem;
-      text-align: center;
-      color: #4A5568;
-      font-size: 0.85rem;
+    .category-nav {
+      max-width: 1200px; margin: 1rem auto 0;
+      padding: 0 1.5rem 1rem; display: flex; gap: 0.5rem;
+      flex-wrap: wrap; border-bottom: 1px solid var(--border);
     }
-    @media (max-width: 600px) {
-      .cert { flex-direction: column; align-items: flex-start; }
-      .cert-links { width: 100%; }
-      .cert-links a { flex: 1; text-align: center; }
+    .category-nav button {
+      background: transparent; border: 1px solid var(--border);
+      color: var(--text-dim); padding: 0.4rem 0.8rem;
+      border-radius: 6px; font-size: 0.78rem; cursor: pointer;
+      transition: all 0.2s; white-space: nowrap;
+    }
+    .category-nav button:hover { border-color: var(--border-hover); color: var(--text); }
+    .category-nav button.active { background: var(--blue); border-color: var(--blue); color: #fff; }
+    .container { max-width: 1200px; margin: 2rem auto; padding: 0 1.5rem; }
+    .section-title {
+      font-size: 1.3rem; font-weight: 600; margin-bottom: 1.25rem;
+      padding-bottom: 0.5rem; border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; gap: 0.5rem;
+    }
+    .section-title .icon { font-size: 1.2rem; }
+    .section-title .count { margin-left: auto; font-size: 0.8rem; color: var(--text-dim); font-weight: 400; }
+    .cert-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 0.75rem; margin-bottom: 2.5rem;
+    }
+    .cert-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 8px; padding: 1rem 1.2rem; transition: all 0.2s;
+      display: flex; flex-direction: column; gap: 0.4rem;
+    }
+    .cert-card:hover {
+      border-color: var(--border-hover); transform: translateY(-1px);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    }
+    .cert-card.hidden { display: none; }
+    .cert-card .card-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 0.75rem; }
+    .cert-card .card-header h3 { font-size: 0.95rem; font-weight: 500; color: var(--text); line-height: 1.3; }
+    .cert-card .issuer { font-size: 0.8rem; color: var(--text-dim); margin-top: 0.1rem; }
+    .cert-card .date { font-size: 0.75rem; color: var(--text-muted); }
+    .cert-card .actions { display: flex; gap: 0.4rem; margin-top: 0.3rem; flex-shrink: 0; }
+    .cert-card .actions a {
+      display: inline-flex; align-items: center; gap: 0.3rem;
+      padding: 0.3rem 0.65rem; border-radius: 5px; font-size: 0.75rem;
+      text-decoration: none; font-weight: 500; transition: all 0.2s;
+    }
+    .btn-pdf { background: rgba(0,116,255,0.15); color: var(--blue); border: 1px solid rgba(0,116,255,0.3); }
+    .btn-pdf:hover { background: var(--blue); color: #fff; }
+    .btn-verify { background: rgba(255,215,0,0.1); color: var(--gold); border: 1px solid rgba(255,215,0,0.2); }
+    .btn-verify:hover { background: rgba(255,215,0,0.2); }
+    .btn-view { background: rgba(0,255,136,0.1); color: var(--green); border: 1px solid rgba(0,255,136,0.2); }
+    .btn-view:hover { background: rgba(0,255,136,0.2); }
+    .badge { display: inline-block; font-size: 0.65rem; padding: 0.15rem 0.5rem; border-radius: 4px; font-weight: 500; letter-spacing: 0.3px; }
+    .badge-ai { background: rgba(108,71,255,0.15); color: #A78BFA; }
+    .badge-design { background: rgba(255,77,141,0.12); color: var(--pink); }
+    .badge-business { background: rgba(0,191,255,0.12); color: #00BFFF; }
+    .badge-quality { background: rgba(255,215,0,0.12); color: var(--gold); }
+    .no-results { display: none; text-align: center; padding: 3rem 1rem; color: var(--text-dim); }
+    .no-results.visible { display: block; }
+    .no-results span { font-size: 2rem; display: block; margin-bottom: 0.5rem; }
+    footer { border-top: 1px solid var(--border); padding: 2rem 1.5rem; margin-top: 2rem; }
+    .footer-inner { max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+    footer .copy { font-size: 0.8rem; color: var(--text-muted); }
+    footer .links { display: flex; gap: 1rem; flex-wrap: wrap; }
+    footer .links a { color: var(--text-dim); text-decoration: none; font-size: 0.8rem; transition: color 0.2s; }
+    footer .links a:hover { color: var(--blue); }
+    @media (max-width: 768px) {
+      .header-inner { flex-wrap: wrap; }
+      .header-right span { display: none; }
+      .cert-grid { grid-template-columns: 1fr; }
+      .footer-inner { flex-direction: column; text-align: center; }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>AEL <span>Certificates</span></h1>
-    <p class="subtitle">Ayman Elmasry — All certificates are independently verifiable through their respective issuing institutions.</p>
 
-    <h2>AI &amp; Technology</h2>
-
-    <div class="cert">
-      <div class="cert-info">
-        <h3>Artificial Intelligence Fundamentals</h3>
-        <p class="meta">IBM SkillsBuild — June 2025</p>
+<header>
+  <div class="header-inner">
+    <a class="logo" href="https://aymanelmasryael.github.io">
+      <svg viewBox="0 0 226.77 226.77">
+        <rect x="8" y="130" width="38" height="38" rx="4" fill="#0074FF"/>
+        <rect x="94" y="130" width="38" height="38" rx="4" fill="#0074FF"/>
+        <rect x="180" y="130" width="38" height="38" rx="4" fill="#0074FF"/>
+        <rect x="8" y="180" width="38" height="38" rx="4" fill="#0074FF"/>
+        <rect x="94" y="180" width="38" height="38" rx="4" fill="#0074FF"/>
+        <rect x="180" y="180" width="38" height="38" rx="4" fill="#0074FF"/>
+        <polygon points="113.385,30 56.692,120 170.078,120" fill="none" stroke="#fff" stroke-width="4"/>
+        <text x="113.385" y="92" text-anchor="middle" fill="#fff" font-size="40" font-weight="bold" font-family="sans-serif">A</text>
+      </svg>
+      <div class="logo-text">
+        <span class="ael">AEL</span>
+        <span class="title">Certificates</span>
       </div>
-      <div class="cert-links">
-        <a class="btn-pdf" href="./IBMDesign20250611-28-tkb00x.pdf">PDF</a>
-        <a class="btn-verify" href="https://www.credly.com/badges/987ce86b-fae4-49ee-b9d8-726979b95ebe" target="_blank">Verify</a>
-      </div>
+    </a>
+    <div class="header-right">
+      <span>Ayman Elmasry<br>Verified Credentials</span>
     </div>
-
-    <div class="cert">
-      <div class="cert-info">
-        <h3>Information Systems &amp; Computer Applications (Part 1: IT)</h3>
-        <p class="meta">UPValenciaX / edX — March 2017</p>
-      </div>
-      <div class="cert-links">
-        <a class="btn-pdf" href="./UPValenciaX%20ISC101.1x%20Certificate%20_%20edX.pdf">PDF</a>
-        <a class="btn-verify" href="https://courses.edx.org/certificates/4a6bcca93db54f90bed3256eab0c70ee" target="_blank">Verify</a>
-      </div>
-    </div>
-
-    <div class="cert">
-      <div class="cert-info">
-        <h3>Information Systems &amp; Computer Applications (Part 2: Hardware)</h3>
-        <p class="meta">UPValenciaX / edX — June 2017</p>
-      </div>
-      <div class="cert-links">
-        <a class="btn-pdf" href="./UPValenciaX%20ISC101.2x%20Certificate%20_%20edX.pdf">PDF</a>
-        <a class="btn-verify" href="https://courses.edx.org/certificates/c51dfae4900447eb853e5ab6f410bb01" target="_blank">Verify</a>
-      </div>
-    </div>
-
-    <div class="cert">
-      <div class="cert-info">
-        <h3>Introduction to AI with Python</h3>
-        <p class="meta">Domestika — March 2026</p>
-      </div>
-      <div class="cert-links">
-        <a class="btn-pdf" href="./Introduction%20to%20AI%20with%20Python.pdf">PDF</a>
-        <a class="btn-verify" href="https://www.domestika.org/en/certificates/5373b75b69861b59a4a60dfb98973793" target="_blank">Verify</a>
-      </div>
-    </div>
-
-    <h2>Design &amp; Creative</h2>
-
-    <div class="cert">
-      <div class="cert-info">
-        <h3>Digital Arts &amp; Web Design</h3>
-        <p class="meta">AAST University — March 2024</p>
-      </div>
-      <div class="cert-links">
-        <a class="btn-pdf" href="./Arab%20Academy%20for%20Science%2C%20Technology%20%26%20Maritime%20Transport%201.png">View</a>
-      </div>
-    </div>
-
-    <div class="cert">
-      <div class="cert-info">
-        <h3>Introduction to After Effects</h3>
-        <p class="meta">Domestika — December 2020</p>
-      </div>
-      <div class="cert-links">
-        <a class="btn-pdf" href="./Introduction%20to%20After%20Effects.pdf">PDF</a>
-        <a class="btn-verify" href="https://www.domestika.org/en/certificates/e380e88f0de0b0c13ab0c37599c952de" target="_blank">Verify</a>
-      </div>
-    </div>
-
-    <div class="cert">
-      <div class="cert-info">
-        <h3>Vectorial Animation Frame by Frame Style with After Effects</h3>
-        <p class="meta">Domestika — December 2020</p>
-      </div>
-      <div class="cert-links">
-        <a class="btn-pdf" href="./Vectorial%20Animation%20Frame%20by%20Frame%20Style%20with%20After%20Effects.pdf">PDF</a>
-        <a class="btn-verify" href="https://www.domestika.org/en/certificates/e8eb7cfb83c890be50a0bf7c07c9f8c2" target="_blank">Verify</a>
-      </div>
-    </div>
-
-    <div class="cert">
-      <div class="cert-info">
-        <h3>Logo Design: From Concept to Presentation</h3>
-        <p class="meta">Domestika — December 2020</p>
-      </div>
-      <div class="cert-links">
-        <a class="btn-pdf" href="./Logo%20Design%20From%20Concept%20to%20Presentation.pdf">PDF</a>
-        <a class="btn-verify" href="https://www.domestika.org/en/certificates/cd86dde8cb52f47a2c034711e1ec7b7c" target="_blank">Verify</a>
-      </div>
-    </div>
-
-    <div class="cert">
-      <div class="cert-info">
-        <h3>Illustrated Digital Lettering</h3>
-        <p class="meta">Domestika — January 2021</p>
-      </div>
-      <div class="cert-links">
-        <a class="btn-pdf" href="./Illustrated%20Digital%20Lettering.pdf">PDF</a>
-        <a class="btn-verify" href="https://www.domestika.org/en/certificates/0b17f42bcbdbf63dd64ff7983329a31b" target="_blank">Verify</a>
-      </div>
-    </div>
-
-    <div class="cert">
-      <div class="cert-info">
-        <h3>Introduction to Adobe Illustrator</h3>
-        <p class="meta">Domestika — March 2021</p>
-      </div>
-      <div class="cert-links">
-        <a class="btn-pdf" href="./Introduction%20to%20Adobe%20Illustrator.pdf">PDF</a>
-        <a class="btn-verify" href="https://www.domestika.org/en/certificates/79f52b4d915769c71ad8391e48f1c269" target="_blank">Verify</a>
-      </div>
-    </div>
-
-    <div class="cert">
-      <div class="cert-info">
-        <h3>Logo Design: Graphic Simplification and Minimalism</h3>
-        <p class="meta">Domestika — July 2021</p>
-      </div>
-      <div class="cert-links">
-        <a class="btn-pdf" href="./Logo%20Design%20Graphic%20Simplification%20and%20Minimalism).pdf">PDF</a>
-        <a class="btn-verify" href="https://www.domestika.org/en/certificates/2f720d30a6f4c78b158de129f7b189e3" target="_blank">Verify</a>
-      </div>
-    </div>
-
-    <div class="cert">
-      <div class="cert-info">
-        <h3>Adobe Illustrator for Beginners</h3>
-        <p class="meta">Domestika — November 2025</p>
-      </div>
-      <div class="cert-links">
-        <a class="btn-pdf" href="./Adobe%20Illustrator%20for%20Beginners.pdf">PDF</a>
-        <a class="btn-verify" href="https://www.domestika.org/en/certificates/4bedac063ba5ac94fdf76d9c6301264e" target="_blank">Verify</a>
-      </div>
-    </div>
-
-    <div class="cert">
-      <div class="cert-info">
-        <h3>Introduction to Adobe Photoshop</h3>
-        <p class="meta">Domestika — November 2025</p>
-      </div>
-      <div class="cert-links">
-        <a class="btn-pdf" href="./Introduction%20to%20Adobe%20Photoshop.pdf">PDF</a>
-        <a class="btn-verify" href="https://www.domestika.org/en/certificates/e7ad7f46d351583bc9aaa25091c799c4" target="_blank">Verify</a>
-      </div>
-    </div>
-
-    <div class="cert">
-      <div class="cert-info">
-        <h3>Designing a Typographic Poster with Illustrator</h3>
-        <p class="meta">Domestika — March 2026</p>
-      </div>
-      <div class="cert-links">
-        <a class="btn-pdf" href="./Designing%20a%20Typographic%20Poster%20with%20Illustrator.pdf">PDF</a>
-        <a class="btn-verify" href="https://www.domestika.org/en/certificates/735d4e9aa83dca073161bfb7cc19bf29" target="_blank">Verify</a>
-      </div>
-    </div>
-
-    <div class="cert">
-      <div class="cert-info">
-        <h3>Instagram Strategy for Business Growth</h3>
-        <p class="meta">Domestika — November 2025</p>
-      </div>
-      <div class="cert-links">
-        <a class="btn-pdf" href="./Instagram%20Strategy%20for%20Business%20Growth.pdf">PDF</a>
-        <a class="btn-verify" href="https://www.domestika.org/en/certificates/8674bd9eb48c245de7527f76afc669d3" target="_blank">Verify</a>
-      </div>
-    </div>
-
-    <h2>Business &amp; Strategy</h2>
-
-    <div class="cert">
-      <div class="cert-info">
-        <h3>Digital Marketing Professional</h3>
-        <p class="meta">Google / The Open University — April 2019</p>
-      </div>
-      <div class="cert-links">
-        <a class="btn-pdf" href="./Digital%20Marketing%20Professional.pdf">PDF</a>
-        <a class="btn-verify" href="https://learndigital.withgoogle.com/link/1g13k7gbvgg" target="_blank">Verify</a>
-      </div>
-    </div>
-
-    <h2>Quality &amp; Standards</h2>
-
-    <div class="cert">
-      <div class="cert-info">
-        <h3>ISO 9001, ISO 14001, OHSAS 18001</h3>
-        <p class="meta">Quality Systems Consultancy Center (Kuwait) — September 2011</p>
-      </div>
-      <div class="cert-links">
-        <a class="btn-pdf" href="./Ayman_Elmasry_Certifications_LinkedIn.pdf">Summary</a>
-      </div>
-    </div>
-
-    <footer>
-      <p>AEL Digital Studio — <a href="https://aymanelmasry.com" style="color:#0074FF; text-decoration:none;">aymanelmasry.com</a></p>
-    </footer>
   </div>
+</header>
+
+<div class="search-wrap">
+  <div class="search-bar">
+    <span class="search-icon">&#x1F50D;</span>
+    <input type="text" id="searchInput" placeholder="Search certificates..." oninput="filterCerts()">
+    <span class="search-hint">/</span>
+  </div>
+</div>
+
+<nav class="category-nav" id="categoryNav">
+  <button class="active" data-cat="all" onclick="filterCategory('all', this)">All</button>
+  <button data-cat="ai" onclick="filterCategory('ai', this)">&#x1F4A1; AI &amp; Technology</button>
+  <button data-cat="design" onclick="filterCategory('design', this)">&#x1F3A8; Design &amp; Creative</button>
+  <button data-cat="business" onclick="filterCategory('business', this)">&#x1F4CA; Business &amp; Strategy</button>
+  <button data-cat="quality" onclick="filterCategory('quality', this)">&#x2699;&#xFE0F; Quality &amp; Standards</button>
+</nav>
+
+<div class="container" id="certContainer">
+  <div class="section-title">
+    <span class="icon">&#x1F4A1;</span> AI &amp; Technology
+    <span class="count">4</span>
+  </div>
+  <div class="cert-grid" data-category="ai">
+    <div class="cert-card" data-category="ai">
+      <div class="card-header">
+        <div>
+          <h3>💡 Artificial Intelligence Fundamentals</h3>
+          <div class="issuer">IBM SkillsBuild</div>
+          <div class="date">June 2025</div>
+        </div>
+        <span class="badge badge-ai">AI</span>
+      </div>
+      <div class="actions">
+        <a class="btn-pdf" href="IBMDesign20250611-28-tkb00x.pdf" target="_blank">&#x1F4C4; PDF</a>
+        <a class="btn-verify" href="https://www.credly.com/badges/987ce86b-fae4-49ee-b9d8-726979b95ebe" target="_blank">&#x2714; Verify</a>
+      </div>
+    </div>
+    <div class="cert-card" data-category="ai">
+      <div class="card-header">
+        <div>
+          <h3>💡 Information Systems & Computer Applications (Part 1: IT)</h3>
+          <div class="issuer">UPValenciaX / edX</div>
+          <div class="date">March 2017</div>
+        </div>
+        <span class="badge badge-ai">AI</span>
+      </div>
+      <div class="actions">
+        <a class="btn-pdf" href="UPValenciaX%20ISC101.1x%20Certificate%20_%20edX.pdf" target="_blank">&#x1F4C4; PDF</a>
+        <a class="btn-verify" href="https://courses.edx.org/certificates/4a6bcca93db54f90bed3256eab0c70ee" target="_blank">&#x2714; Verify</a>
+      </div>
+    </div>
+    <div class="cert-card" data-category="ai">
+      <div class="card-header">
+        <div>
+          <h3>💡 Information Systems & Computer Applications (Part 2: Hardware)</h3>
+          <div class="issuer">UPValenciaX / edX</div>
+          <div class="date">June 2017</div>
+        </div>
+        <span class="badge badge-ai">AI</span>
+      </div>
+      <div class="actions">
+        <a class="btn-pdf" href="UPValenciaX%20ISC101.2x%20Certificate%20_%20edX.pdf" target="_blank">&#x1F4C4; PDF</a>
+        <a class="btn-verify" href="https://courses.edx.org/certificates/c51dfae4900447eb853e5ab6f410bb01" target="_blank">&#x2714; Verify</a>
+      </div>
+    </div>
+    <div class="cert-card" data-category="ai">
+      <div class="card-header">
+        <div>
+          <h3>💡 Introduction to AI with Python</h3>
+          <div class="issuer">Domestika — Rodrigo Montemayor</div>
+          <div class="date">March 2026</div>
+        </div>
+        <span class="badge badge-ai">AI</span>
+      </div>
+      <div class="actions">
+        <a class="btn-pdf" href="Introduction%20to%20AI%20with%20Python.pdf" target="_blank">&#x1F4C4; PDF</a>
+        <a class="btn-verify" href="https://www.domestika.org/en/certificates/5373b75b69861b59a4a60dfb98973793" target="_blank">&#x2714; Verify</a>
+      </div>
+    </div>
+    <div class="cert-card" data-category="design">
+      <div class="card-header">
+        <div>
+          <h3>🎨 Digital Arts & Web Design</h3>
+          <div class="issuer">AAST University</div>
+          <div class="date">March 2024</div>
+        </div>
+        <span class="badge badge-design">Design</span>
+      </div>
+      <div class="actions">
+        <a class="btn-pdf" href="Arab%20Academy%20for%20Science%2C%20Technology%20%26%20Maritime%20Transport%201.png" target="_blank">&#x1F4C4; PDF</a>
+        <a class="btn-view" href="Arab%20Academy%20for%20Science%2C%20Technology%20%26%20Maritime%20Transport%201.png" target="_blank">&#x1F441; View</a>
+      </div>
+    </div>
+    <div class="cert-card" data-category="design">
+      <div class="card-header">
+        <div>
+          <h3>🎨 Introduction to After Effects</h3>
+          <div class="issuer">Domestika — Carlos Gustavo Albarrán Bailén</div>
+          <div class="date">December 2020</div>
+        </div>
+        <span class="badge badge-design">Design</span>
+      </div>
+      <div class="actions">
+        <a class="btn-pdf" href="Introduction%20to%20After%20Effects.pdf" target="_blank">&#x1F4C4; PDF</a>
+        <a class="btn-verify" href="https://www.domestika.org/en/certificates/e380e88f0de0b0c13ab0c37599c952de" target="_blank">&#x2714; Verify</a>
+      </div>
+    </div>
+    <div class="cert-card" data-category="design">
+      <div class="card-header">
+        <div>
+          <h3>🎨 Vectorial Animation Frame by Frame Style with After Effects</h3>
+          <div class="issuer">Domestika — Pablo Cuello</div>
+          <div class="date">December 2020</div>
+        </div>
+        <span class="badge badge-design">Design</span>
+      </div>
+      <div class="actions">
+        <a class="btn-pdf" href="Vectorial%20Animation%20Frame%20by%20Frame%20Style%20with%20After%20Effects.pdf" target="_blank">&#x1F4C4; PDF</a>
+        <a class="btn-verify" href="https://www.domestika.org/en/certificates/e8eb7cfb83c890be50a0bf7c07c9f8c2" target="_blank">&#x2714; Verify</a>
+      </div>
+    </div>
+    <div class="cert-card" data-category="design">
+      <div class="card-header">
+        <div>
+          <h3>🎨 Logo Design: From Concept to Presentation</h3>
+          <div class="issuer">Domestika — Sagi Haviv</div>
+          <div class="date">December 2020</div>
+        </div>
+        <span class="badge badge-design">Design</span>
+      </div>
+      <div class="actions">
+        <a class="btn-pdf" href="Logo%20Design%20From%20Concept%20to%20Presentation.pdf" target="_blank">&#x1F4C4; PDF</a>
+        <a class="btn-verify" href="https://www.domestika.org/en/certificates/cd86dde8cb52f47a2c034711e1ec7b7c" target="_blank">&#x2714; Verify</a>
+      </div>
+    </div>
+    <div class="cert-card" data-category="design">
+      <div class="card-header">
+        <div>
+          <h3>🎨 Illustrated Digital Lettering</h3>
+          <div class="issuer">Domestika — Birgit Palma</div>
+          <div class="date">January 2021</div>
+        </div>
+        <span class="badge badge-design">Design</span>
+      </div>
+      <div class="actions">
+        <a class="btn-pdf" href="Illustrated%20Digital%20Lettering.pdf" target="_blank">&#x1F4C4; PDF</a>
+        <a class="btn-verify" href="https://www.domestika.org/en/certificates/0b17f42bcbdbf63dd64ff7983329a31b" target="_blank">&#x2714; Verify</a>
+      </div>
+    </div>
+    <div class="cert-card" data-category="design">
+      <div class="card-header">
+        <div>
+          <h3>🎨 Introduction to Adobe Illustrator</h3>
+          <div class="issuer">Domestika — Aarón Martínez</div>
+          <div class="date">March 2021</div>
+        </div>
+        <span class="badge badge-design">Design</span>
+      </div>
+      <div class="actions">
+        <a class="btn-pdf" href="Introduction%20to%20Adobe%20Illustrator.pdf" target="_blank">&#x1F4C4; PDF</a>
+        <a class="btn-verify" href="https://www.domestika.org/en/certificates/79f52b4d915769c71ad8391e48f1c269" target="_blank">&#x2714; Verify</a>
+      </div>
+    </div>
+    <div class="cert-card" data-category="design">
+      <div class="card-header">
+        <div>
+          <h3>🎨 Logo Design: Graphic Simplification and Minimalism</h3>
+          <div class="issuer">Domestika — Rubén Ferlo</div>
+          <div class="date">July 2021</div>
+        </div>
+        <span class="badge badge-design">Design</span>
+      </div>
+      <div class="actions">
+        <a class="btn-pdf" href="Logo%20Design%20Graphic%20Simplification%20and%20Minimalism%29.pdf" target="_blank">&#x1F4C4; PDF</a>
+        <a class="btn-verify" href="https://www.domestika.org/en/certificates/2f720d30a6f4c78b158de129f7b189e3" target="_blank">&#x2714; Verify</a>
+      </div>
+    </div>
+    <div class="cert-card" data-category="design">
+      <div class="card-header">
+        <div>
+          <h3>🎨 Adobe Illustrator for Beginners</h3>
+          <div class="issuer">Domestika — Tina Touli</div>
+          <div class="date">November 2025</div>
+        </div>
+        <span class="badge badge-design">Design</span>
+      </div>
+      <div class="actions">
+        <a class="btn-pdf" href="Adobe%20Illustrator%20for%20Beginners.pdf" target="_blank">&#x1F4C4; PDF</a>
+        <a class="btn-verify" href="https://www.domestika.org/en/certificates/4bedac063ba5ac94fdf76d9c6301264e" target="_blank">&#x2714; Verify</a>
+      </div>
+    </div>
+    <div class="cert-card" data-category="design">
+      <div class="card-header">
+        <div>
+          <h3>🎨 Introduction to Adobe Photoshop</h3>
+          <div class="issuer">Domestika — Carles Marsal</div>
+          <div class="date">November 2025</div>
+        </div>
+        <span class="badge badge-design">Design</span>
+      </div>
+      <div class="actions">
+        <a class="btn-pdf" href="Introduction%20to%20Adobe%20Photoshop.pdf" target="_blank">&#x1F4C4; PDF</a>
+        <a class="btn-verify" href="https://www.domestika.org/en/certificates/e7ad7f46d351583bc9aaa25091c799c4" target="_blank">&#x2714; Verify</a>
+      </div>
+    </div>
+    <div class="cert-card" data-category="design">
+      <div class="card-header">
+        <div>
+          <h3>🎨 Designing a Typographic Poster with Illustrator</h3>
+          <div class="issuer">Domestika — Steffen Wagner</div>
+          <div class="date">March 2026</div>
+        </div>
+        <span class="badge badge-design">Design</span>
+      </div>
+      <div class="actions">
+        <a class="btn-pdf" href="Designing%20a%20Typographic%20Poster%20with%20Illustrator.pdf" target="_blank">&#x1F4C4; PDF</a>
+        <a class="btn-verify" href="https://www.domestika.org/en/certificates/735d4e9aa83dca073161bfb7cc19bf29" target="_blank">&#x2714; Verify</a>
+      </div>
+    </div>
+    <div class="cert-card" data-category="design">
+      <div class="card-header">
+        <div>
+          <h3>🎨 Instagram Strategy for Business Growth</h3>
+          <div class="issuer">Domestika — Dot Lung</div>
+          <div class="date">November 2025</div>
+        </div>
+        <span class="badge badge-design">Design</span>
+      </div>
+      <div class="actions">
+        <a class="btn-pdf" href="Instagram%20Strategy%20for%20Business%20Growth.pdf" target="_blank">&#x1F4C4; PDF</a>
+        <a class="btn-verify" href="https://www.domestika.org/en/certificates/8674bd9eb48c245de7527f76afc669d3" target="_blank">&#x2714; Verify</a>
+      </div>
+    </div>
+    <div class="cert-card" data-category="business">
+      <div class="card-header">
+        <div>
+          <h3>📊 Digital Marketing Professional</h3>
+          <div class="issuer">Google / The Open University</div>
+          <div class="date">April 2019</div>
+        </div>
+        <span class="badge badge-business">Business</span>
+      </div>
+      <div class="actions">
+        <a class="btn-pdf" href="Digital%20Marketing%20Professional.pdf" target="_blank">&#x1F4C4; PDF</a>
+        <a class="btn-verify" href="https://learndigital.withgoogle.com/link/1g13k7gbvgg" target="_blank">&#x2714; Verify</a>
+      </div>
+    </div>
+    <div class="cert-card" data-category="quality">
+      <div class="card-header">
+        <div>
+          <h3>⚙️ ISO 9001, ISO 14001, OHSAS 18001</h3>
+          <div class="issuer">Quality Systems Consultancy Center (Kuwait)</div>
+          <div class="date">September 2011</div>
+        </div>
+        <span class="badge badge-quality">Quality</span>
+      </div>
+      <div class="actions">
+        <a class="btn-pdf" href="Ayman_Elmasry_Certifications_LinkedIn.pdf" target="_blank">&#x1F4C4; PDF</a>
+        <a class="btn-view" href="Ayman_Elmasry_Certifications_LinkedIn.pdf" target="_blank">&#x1F441; View</a>
+      </div>
+    </div>
+  </div>
+  <div class="no-results" id="noResults">
+    <span>&#x1F50D;</span>
+    <p>No certificates match your search.</p>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="copy">&copy; 2026 Ayman Elmasry &mdash; AEL Digital Studio</div>
+    <div class="links">
+      <a href="https://aymanelmasry.com">&#x1F310; aymanelmasry.com</a>
+      <a href="https://github.com/aymanelmasryael">&#x1F5A5; GitHub</a>
+      <a href="https://linkedin.com/in/aymanelmasryael">&#x1F465; LinkedIn</a>
+      <a href="mailto:ayman@aymanelmasry.me">&#x2709; Email</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+function filterCategory(cat, btn) {
+  document.querySelectorAll('#categoryNav button').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  const cards = document.querySelectorAll('.cert-card');
+  const search = document.getElementById('searchInput').value.toLowerCase();
+  let visible = 0;
+  cards.forEach(c => {
+    const match = (cat === 'all' || c.dataset.category === cat);
+    const text = c.textContent.toLowerCase();
+    const searchMatch = !search || text.includes(search);
+    if (match && searchMatch) { c.classList.remove('hidden'); visible++; }
+    else { c.classList.add('hidden'); }
+  });
+  document.getElementById('noResults').classList.toggle('visible', visible === 0);
+}
+
+function filterCerts() {
+  const activeBtn = document.querySelector('#categoryNav button.active');
+  filterCategory(activeBtn ? activeBtn.dataset.cat : 'all', activeBtn);
+}
+
+document.addEventListener('keydown', function(e) {
+  if (e.key === '/') {
+    e.preventDefault();
+    document.getElementById('searchInput').focus();
+  }
+  if (e.key === 'Escape') {
+    document.getElementById('searchInput').blur();
+  }
+});
+</script>
+
 </body>
 </html>
