@@ -45,7 +45,7 @@
 | **AEL Prompt Framework** | 52 UI prompts — merged as Batch 11 into 1000+ Prompts Library | [Launch](https://aymanelmasryael.github.io/ael-prompt-framework/) |
 | **3D Particle Backgrounds Library** | 1,000+ prompts with interactive 3D canvas | [Launch](https://aymanelmasryael.github.io/ael-3d-particle-backgrounds-library/) |
 | **AEL Particles Lab v3.2** | High-density particle engine with generative AI | [Launch](https://aymanelmasryael.github.io/ael-particles-lab/) |
-| **AI Alignment Quotes** | 10,000 unique quotes from combinatorial engine | [Launch](https://aymanelmasryael.github.io/ai-alignment-quotes/) |
+| **AI Alignment Quotes** | 10,000 unique quotes from combinatorial engine | [Launch](https://aymanelmasryael.github.io/ael-ai-alignment-quotes/) |
 
 ### CS50x
 
