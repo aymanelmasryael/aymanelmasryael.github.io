@@ -116,7 +116,7 @@ aymanelmasryael.github.io/
 
 **Created by:** Ayman Elmasry — AEL Digital Studio  
 **Website:** [aymanelmasry.com](https://aymanelmasry.com)  
-**Email:** [info@aymanelmasry.com](mailto:info@aymanelmasry.com)  
+**Email:** [ayman@aymanelmasry.me](mailto:ayman@aymanelmasry.me)  
 **License:** © 2026 Ayman Elmasry — AEL Digital Studio. All rights reserved.
 
 ### Connect
